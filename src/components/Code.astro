@@ -1,0 +1,40 @@
+---
+import { v4 } from "uuid";
+
+export interface Props {
+    content: string;
+}
+
+const { content } = Astro.props;
+const id = v4();
+---
+<div class="relative mt-1">
+    <pre
+        class="bg-gray-100 p-2 text-lg rounded overflow-hidden overflow-x-auto pr-28" id={id}>{content}</pre>
+    <div
+        class="absolute cursor-pointer right-0 top-2 bottom-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-800 bg-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-2"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="-ml-1 mr-2 h-5 w-5"
+            viewBox="0 0 512 512"
+            ><title>Clipboard</title><path
+                d="M336 64h32a48 48 0 0148 48v320a48 48 0 01-48 48H144a48 48 0 01-48-48V112a48 48 0 0148-48h32"
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="32"></path><rect
+                x="176"
+                y="32"
+                width="160"
+                height="64"
+                rx="26.13"
+                ry="26.13"
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="32"></rect>
+        </svg>
+        Copy
+    </div>
+</div>

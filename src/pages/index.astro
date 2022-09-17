@@ -1,0 +1,245 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Peer from "../components/Peer.astro";
+
+import { execSync } from "child_process";
+import fs from "fs";
+import Code from "../components/Code.astro";
+let { peers } = JSON.parse(
+	execSync("yggdrasilctl -json getPeers", {
+		encoding: "utf-8",
+	})
+);
+
+peers = Object.keys(peers).map(peerIp => {
+	let peer = peers[peerIp]
+	return {
+		ip: peerIp,
+		...peer
+	}
+})
+
+const { self } = JSON.parse(
+	execSync("yggdrasilctl -json getSelf", {
+		encoding: "utf-8",
+	})
+);
+
+import HJSON from "hjson";
+
+const { Peers: _upStreamsPeers } = HJSON.parse(fs.readFileSync("/etc/yggdrasil.conf", {
+	encoding: "utf-8"
+}));
+
+let upStreamsPeers = peers.filter((peer: any) => _upStreamsPeers.includes(peer.remote));
+let downStreamsPeers = peers.filter((peer: any) => !_upStreamsPeers.includes(peer.remote));
+---
+
+<Layout title="201:ca29:d4c5:50c8:b6f3:aa9a:e5d7:616c | Peers">
+	<main>
+		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+			<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+				<div class="px-4 py-5 sm:px-6">
+					<h3 class="text-lg font-medium leading-6 text-gray-900">
+						Public Peer Details
+					</h3>
+				</div>
+				<div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+					<dl class="sm:divide-y sm:divide-gray-200">
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Public IP
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								<Code content="tcp://158.101.229.219:17002" />
+								<Code content="tcp://[2603:c023:8001:1600:35e0:acde:2c6e:b27f]:17002" />
+								<Code content="tls://158.101.229.219:17001" />
+								<Code content="tls://[2603:c023:8001:1600:35e0:acde:2c6e:b27f]:17001" />
+							</dd>
+						</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Yggdrasil IPv6 Address
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								<Code content={Object.keys(self)[0]} />
+							</dd>
+						</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Yggdrasil IPv6 Subnet
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								<Code content={self[Object.keys(self)[0]].subnet} />
+							</dd>
+						</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Yggdrasil Version
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								<Code content={self[Object.keys(self)[0]].build_version} />
+							</dd>
+						</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Yggdrasil Public Key
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								<Code content={self[Object.keys(self)[0]].key} />
+							</dd>
+						</div>
+						<div
+						class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+					>
+						<dt class="text-sm font-medium text-gray-500">
+							Yggdrasil Coords
+						</dt>
+						<dd
+							class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+						>
+							<Code content={`[${self[Object.keys(self)[0]].coords.join(", ")}]`} />
+						</dd>
+					</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Location
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								Saudi Arabia, Jeddah
+							</dd>
+						</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Traffic
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								10TB/month
+							</dd>
+						</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Bandwidth
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								0.5Gbps (500Mbps)
+							</dd>
+						</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Downstreams Peers
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								{downStreamsPeers.length}
+							</dd>
+						</div>
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Upstreams Peers
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								{upStreamsPeers.length}
+							</dd>
+						</div>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<header>
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 mb-2">
+			<h1
+				class="text-3xl font-bold leading-tight tracking-tight text-gray-900"
+			>
+				Downstreams Peers
+				<span
+					class="inline-block flex-shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-sm text-gray-800 align-middle"
+					>{downStreamsPeers.length}
+				</span>
+			</h1>
+		</div>
+	</header>
+	<main>
+		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+			<ul
+				role="list"
+				class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+			>
+				{
+					downStreamsPeers.map(peer => {
+						return <Peer name={peer.ip} data={peer} />;
+					})
+				}
+			</ul>
+		</div>
+	</main>
+
+	<header>
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 mb-2">
+			<h1
+				class="text-3xl font-bold leading-tight tracking-tight text-gray-900"
+			>
+				Upstreams Peers
+				<span
+					class="inline-block flex-shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-sm text-gray-800 align-middle"
+					>{upStreamsPeers.length}
+				</span>
+			</h1>
+		</div>
+	</header>
+	<main>
+		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+			<ul
+				role="list"
+				class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+			>
+			{
+				upStreamsPeers.map(peer => {
+					return <Peer name={peer.ip} data={peer} />;
+				})
+			}
+			</ul>
+		</div>
+	</main>
+</Layout>

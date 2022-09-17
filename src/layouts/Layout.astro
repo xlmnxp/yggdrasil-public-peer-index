@@ -1,0 +1,46 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="min-h-full">
+			<nav class="bg-white shadow-sm">
+				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+					<div class="flex h-16 justify-between">
+						<div class="flex">
+							<div class="flex flex-shrink-0 items-center">
+								<h1 class="font-bold text-indigo-500">201:ca29:d4c5:50c8:b6f3:aa9a:e5d7:616c</h1>
+							</div>
+							<div
+								class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8"
+							>
+								<a
+									href="/"
+									class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+									aria-current="page">Peers</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+
+			<div class="py-10">
+				<slot />
+			</div>
+		</div>
+	</body>
+</html>
