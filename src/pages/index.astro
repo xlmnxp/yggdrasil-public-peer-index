@@ -41,7 +41,7 @@ let downStreamsPeers = peers.filter(
 	(peer: any) => !_upStreamsPeers.includes(peer.remote)
 );
 
-await promisify(exec)(`vnstati -hs -i ens3 -o /public/output.png --transparent --headertext "Yggdrasil / hourly"`);
+await promisify(exec)(`vnstati -hs -i ens3 -o ./public/output.png --transparent --headertext "Yggdrasil / hourly"`);
 ---
 
 <Layout title="201:ca29:d4c5:50c8:b6f3:aa9a:e5d7:616c | Peers">
