@@ -224,6 +224,6 @@ await promisify(exec)(`vnstati -hs -i ens3 -o ./public/output.png --transparent 
 		</div>
 	</main>
 	
-	<PeersTable title="Downstream Peers" description="peers connect connected by them self" peers={downStreamsPeers}/>
-	<PeersTable title="Upstream Peers" description="peers connected directly" peers={upStreamsPeers}/>
+	<PeersTable title="Downstreams" description="peers connected by them self" peers={downStreamsPeers}/>
+	<PeersTable title="Upstreams" description="peers connected directly" peers={upStreamsPeers}/>
 </Layout>
