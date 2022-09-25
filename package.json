@@ -11,8 +11,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astro-github-elements/clipboard-copy": "^0.0.2",
     "@astrojs/node": "^1.0.1",
     "@astrojs/tailwind": "^2.0.1",
+    "@github/clipboard-copy-element": "^1.1.2",
     "@types/hjson": "^2.4.3",
     "@types/node": "^18.7.18",
     "@types/uuid": "^8.3.4",
