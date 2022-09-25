@@ -1,0 +1,172 @@
+---
+export interface Props {
+    title: string;
+    description: string;
+    peers: any[];
+}
+
+const { title, description, peers } = Astro.props;
+
+export function getSize(size: number) {
+    var i: number = Math.floor(Math.log(size) / Math.log(1024));
+    return (
+        // @ts-ignore
+        ((size / Math.pow(1024, i)).toFixed(2) * 1) +
+        " " +
+        ["B", "kB", "MB", "GB", "TB"][i]
+    );
+};
+---
+
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 mb-2">
+    <div class="sm:flex sm:items-center">
+        <div class="sm:flex-auto">
+            <h1 class="text-xl font-semibold text-gray-900">
+                {title}
+            </h1>
+            <p class="mt-2 text-sm text-gray-700">
+                {description}
+            </p>
+        </div>
+    </div>
+
+    <div class="mt-8 flex flex-col">
+        <div class="-my-2 -mx-4 sm:-mx-6 lg:-mx-8">
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="shadow-sm ring-1 ring-black ring-opacity-5">
+                    <table
+                        class="min-w-full max-w-7xl border-separate"
+                        style="border-spacing: 0"
+                    >
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th
+                                    scope="col"
+                                    class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
+                                    >Address</th
+                                >
+                                <th
+                                    scope="col"
+                                    class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                                    >Traffic</th
+                                >
+                                <th
+                                    scope="col"
+                                    class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                                    >Tags</th
+                                >
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            {
+                                peers.map((peer) => {
+                                    return (
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                                                {peer.ip}
+                                                <p class="text-sm text-gray-400">
+                                                    [{peer.coords.join(", ")}]
+                                                </p>
+                                            </td>
+                                            <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 min-w-[270px] w-[270px]">
+                                                <div
+                                                    class="-mt-px flex"
+                                                    title="downloads"
+                                                >
+                                                    <div class="flex w-0 flex-1">
+                                                        <a class="relative inline-flex w-0 flex-1 rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700">
+                                                            <svg
+                                                                class="h-5 w-5 text-gray-400"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                class="ionicon"
+                                                                viewBox="0 0 512 512"
+                                                            >
+                                                                <title>
+                                                                    Download
+                                                                </title>
+                                                                <path
+                                                                    fill="none"
+                                                                    stroke="currentColor"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"
+                                                                    stroke-width="48"
+                                                                    d="M112 268l144 144 144-144M256 392V100"
+                                                                />
+                                                            </svg>
+                                                            <span class="ml-3">
+                                                                {getSize(
+                                                                    peer.bytes_sent
+                                                                )}
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <div
+                                                        class="-ml-px flex w-0 flex-1"
+                                                        title="uploads"
+                                                    >
+                                                        <a class="relative -mr-px inline-flex w-0 flex-1 rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700">
+                                                            <svg
+                                                                class="h-5 w-5 text-gray-400"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                class="ionicon"
+                                                                viewBox="0 0 512 512"
+                                                            >
+                                                                <title>
+                                                                    Upload
+                                                                </title>
+                                                                <path
+                                                                    fill="none"
+                                                                    stroke="currentColor"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"
+                                                                    stroke-width="48"
+                                                                    d="M112 244l144-144 144 144M256 120v292"
+                                                                />
+                                                            </svg>
+                                                            <span class="ml-3">
+                                                                {getSize(
+                                                                    peer.bytes_recvd
+                                                                )}
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                                                <span
+                                                    class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800"
+                                                    title="uptime"
+                                                >
+                                                    {Math.floor(
+                                                        peer.uptime / 60
+                                                    )}{" "}
+                                                    minute
+                                                </span>
+                                                <span
+                                                    class={`inline-block flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
+                                                        peer.remote.indexOf(
+                                                            "tls"
+                                                        ) === 0
+                                                            ? "bg-orange-100 text-orange-800"
+                                                            : "bg-yellow-100 text-yellow-800"
+                                                    }`}
+                                                    title="connection protocol"
+                                                >
+                                                    {
+                                                        peer.remote.split(
+                                                            "://"
+                                                        )[0]
+                                                    }
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

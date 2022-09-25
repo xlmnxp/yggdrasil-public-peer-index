@@ -6,7 +6,7 @@ export interface Props {
 
 const { name, data } = Astro.props;
 
-function getSize(size: number) {
+export function getSize(size: number) {
     var i: number = Math.floor(Math.log(size) / Math.log(1024));
     return (
         // @ts-ignore

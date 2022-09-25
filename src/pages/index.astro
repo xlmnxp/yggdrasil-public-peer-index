@@ -1,12 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Peer from "../components/Peer.astro";
+import Peer, { getSize } from "../components/Peer.astro";
 import { execSync } from "child_process";
 import { exec } from "child_process";
 import fs from "fs";
 import Code from "../components/Code.astro";
 import HJSON from "hjson";
 import { promisify } from "util";
+import PeersTable from "../components/PeersTable.astro";
 
 let { peers } = JSON.parse(
 	execSync("yggdrasilctl -json getPeers", {
@@ -214,10 +215,7 @@ await promisify(exec)(`vnstati -hs -i ens3 -o ./public/output.png --transparent 
 							<dd
 								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
 							>
-								<img
-									src="/output.png"
-									alt="Traffic Uses"
-								/>
+								<img src="/output.png" alt="Traffic Uses" />
 							</dd>
 						</div>
 					</dl>
@@ -225,60 +223,7 @@ await promisify(exec)(`vnstati -hs -i ens3 -o ./public/output.png --transparent 
 			</div>
 		</div>
 	</main>
-
-	<header>
-		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 mb-2">
-			<h1
-				class="text-3xl font-bold leading-tight tracking-tight text-gray-900"
-			>
-				Downstreams Peers
-				<span
-					class="inline-block flex-shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-sm text-gray-800 align-middle"
-					>{downStreamsPeers.length}
-				</span>
-			</h1>
-		</div>
-	</header>
-	<main>
-		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-			<ul
-				role="list"
-				class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-			>
-				{
-					downStreamsPeers.map((peer) => {
-						return <Peer name={peer.ip} data={peer} />;
-					})
-				}
-			</ul>
-		</div>
-	</main>
-
-	<header>
-		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 mb-2">
-			<h1
-				class="text-3xl font-bold leading-tight tracking-tight text-gray-900"
-			>
-				Upstreams Peers
-				<span
-					class="inline-block flex-shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-sm text-gray-800 align-middle"
-					>{upStreamsPeers.length}
-				</span>
-			</h1>
-		</div>
-	</header>
-	<main>
-		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-			<ul
-				role="list"
-				class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-			>
-				{
-					upStreamsPeers.map((peer) => {
-						return <Peer name={peer.ip} data={peer} />;
-					})
-				}
-			</ul>
-		</div>
-	</main>
+	
+	<PeersTable title="Downstream Peers" description="peers connect connected by them self" peers={downStreamsPeers}/>
+	<PeersTable title="Upstream Peers" description="peers connected directly" peers={upStreamsPeers}/>
 </Layout>
