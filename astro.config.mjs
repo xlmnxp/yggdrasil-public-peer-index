@@ -9,6 +9,6 @@ export default defineConfig({
   adapter: node(),
   integrations: [tailwind()],
   server: {
-    port: 80
+    port: 3000
   }
 });
