@@ -9,7 +9,7 @@ import HJSON from "hjson";
 import { promisify } from "util";
 import PeersTable from "../components/PeersTable.astro";
 
-let { peers } = JSON.parse(
+let { peers }: { peers: any[] }= JSON.parse(
 	execSync("yggdrasilctl -json getPeers", {
 		encoding: "utf-8",
 	})
@@ -35,14 +35,39 @@ const { Peers: _upStreamsPeers } = HJSON.parse(
 	})
 );
 
-let upStreamsPeers = peers.filter((peer: any) =>
+let upStreamsPeers: any[] = peers.filter((peer: any) =>
 	_upStreamsPeers.includes(peer.remote)
 );
-let downStreamsPeers = peers.filter(
+let downStreamsPeers: any[] = peers.filter(
 	(peer: any) => !_upStreamsPeers.includes(peer.remote)
 );
 
-await promisify(exec)(`vnstati -hs -i ens3 -o ./public/output.png --transparent --headertext "Yggdrasil / hourly"`);
+const Traffic = {
+	download: peers.reduce(
+		(previousPeer, currentPeer) => {
+			return {
+				bytes_recvd: previousPeer.bytes_recvd + currentPeer.bytes_recvd,
+			};
+		},
+		{
+			bytes_recvd: 0,
+		}
+	).bytes_recvd,
+	upload: peers.reduce(
+		(previousPeer, currentPeer) => {
+			return {
+				bytes_sent: previousPeer.bytes_sent + currentPeer.bytes_sent,
+			};
+		},
+		{
+			bytes_sent: 0,
+		}
+	).bytes_sent,
+};
+
+await promisify(exec)(
+	`vnstati -hs -i ens3 -o ./public/output.png --transparent --headertext "Yggdrasil / hourly"`
+);
 ---
 
 <Layout title="201:ca29:d4c5:50c8:b6f3:aa9a:e5d7:616c | Peers">
@@ -206,6 +231,73 @@ await promisify(exec)(`vnstati -hs -i ens3 -o ./public/output.png --transparent 
 								{upStreamsPeers.length}
 							</dd>
 						</div>
+
+						<div
+							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
+						>
+							<dt class="text-sm font-medium text-gray-500">
+								Used Traffic
+							</dt>
+							<dd
+								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+							>
+								<div class="-mt-px flex" title="downloads">
+									<div class="flex w-0 flex-1">
+										<a
+											class="relative inline-flex w-0 flex-1 rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700"
+										>
+											<svg
+												class="h-5 w-5 text-gray-400"
+												xmlns="http://www.w3.org/2000/svg"
+												class="ionicon"
+												viewBox="0 0 512 512"
+											>
+												<title>Download</title>
+												<path
+													fill="none"
+													stroke="currentColor"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="48"
+													d="M112 268l144 144 144-144M256 392V100"
+												></path>
+											</svg>
+											<span class="ml-3">
+												{getSize(Traffic.download)}
+											</span>
+										</a>
+									</div>
+									<div
+										class="-ml-px flex w-0 flex-1"
+										title="uploads"
+									>
+										<a
+											class="relative -mr-px inline-flex w-0 flex-1 rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700"
+										>
+											<svg
+												class="h-5 w-5 text-gray-400"
+												xmlns="http://www.w3.org/2000/svg"
+												class="ionicon"
+												viewBox="0 0 512 512"
+											>
+												<title>Upload</title>
+												<path
+													fill="none"
+													stroke="currentColor"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="48"
+													d="M112 244l144-144 144 144M256 120v292"
+												></path>
+											</svg>
+											<span class="ml-3">
+												{getSize(Traffic.upload)}
+											</span>
+										</a>
+									</div>
+								</div>
+							</dd>
+						</div>
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
@@ -223,7 +315,15 @@ await promisify(exec)(`vnstati -hs -i ens3 -o ./public/output.png --transparent 
 			</div>
 		</div>
 	</main>
-	
-	<PeersTable title="Downstreams" description="peers connected by them self" peers={downStreamsPeers}/>
-	<PeersTable title="Upstreams" description="peers connected directly" peers={upStreamsPeers}/>
+
+	<PeersTable
+		title="Downstreams"
+		description="peers connected by them self"
+		peers={downStreamsPeers}
+	/>
+	<PeersTable
+		title="Upstreams"
+		description="peers connected directly"
+		peers={upStreamsPeers}
+	/>
 </Layout>
