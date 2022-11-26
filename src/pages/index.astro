@@ -23,7 +23,7 @@ peers = Object.keys(peers).map((peerIp) => {
 	};
 });
 
-const { self } = JSON.parse(
+const self = JSON.parse(
 	execSync("yggdrasilctl -json getSelf", {
 		encoding: "utf-8",
 	})
@@ -109,7 +109,7 @@ await promisify(exec)(
 							<dd
 								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
 							>
-								<Code content={Object.keys(self)[0]} />
+								<Code content={self.address} />
 							</dd>
 						</div>
 						<div
@@ -122,7 +122,7 @@ await promisify(exec)(
 								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
 							>
 								<Code
-									content={self[Object.keys(self)[0]].subnet}
+									content={self.subnet}
 								/>
 							</dd>
 						</div>
@@ -136,8 +136,7 @@ await promisify(exec)(
 								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
 							>
 								<Code
-									content={self[Object.keys(self)[0]]
-										.build_version}
+									content={self.build_version}
 								/>
 							</dd>
 						</div>
@@ -151,7 +150,7 @@ await promisify(exec)(
 								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
 							>
 								<Code
-									content={self[Object.keys(self)[0]].key}
+									content={self.key}
 								/>
 							</dd>
 						</div>
@@ -165,9 +164,7 @@ await promisify(exec)(
 								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
 							>
 								<Code
-									content={`[${self[
-										Object.keys(self)[0]
-									].coords.join(", ")}]`}
+									content={`[${self.coords.join(", ")}]`}
 								/>
 							</dd>
 						</div>
