@@ -36,10 +36,10 @@ const { Peers: _upStreamsPeers } = HJSON.parse(
 );
 
 let upStreamsPeers: any[] = peers.filter((peer: any) =>
-	_upStreamsPeers.find((_peer: any) => _peer.remote == peer.remote)
+	_upStreamsPeers.includes(peer.remote)
 );
 let downStreamsPeers: any[] = peers.filter(
-	(peer: any) => !_upStreamsPeers.find((_peer: any) => _peer.remote == peer.remote)
+	(peer: any) => !_upStreamsPeers.includes(peer.remote)
 );
 
 const Traffic = {
