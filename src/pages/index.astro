@@ -15,14 +15,6 @@ let { peers }: { peers: any[] }= JSON.parse(
 	})
 );
 
-peers = Object.keys(peers).map((peerIp) => {
-	let peer = peers[peerIp];
-	return {
-		ip: peerIp,
-		...peer,
-	};
-});
-
 const self = JSON.parse(
 	execSync("yggdrasilctl -json getSelf", {
 		encoding: "utf-8",
@@ -38,6 +30,7 @@ const { Peers: _upStreamsPeers } = HJSON.parse(
 let upStreamsPeers: any[] = peers.filter((peer: any) =>
 	_upStreamsPeers.includes(peer.remote)
 );
+
 let downStreamsPeers: any[] = peers.filter(
 	(peer: any) => !_upStreamsPeers.includes(peer.remote)
 );
