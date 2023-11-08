@@ -17,6 +17,8 @@ let { peers }: { peers: any[] }= JSON.parse(
 
 peers = peers.filter((v,i,a)=>a.findIndex(v2=>(v2.address===v.address))===i);
 
+peers = peers.filter(peer => peer.up);
+
 const self = JSON.parse(
 	execSync("yggdrasilctl -json getSelf", {
 		encoding: "utf-8",
@@ -24,7 +26,7 @@ const self = JSON.parse(
 );
 
 const { Peers: _upStreamsPeers } = HJSON.parse(
-	fs.readFileSync("/etc/yggdrasil.conf", {
+	fs.readFileSync("/etc/yggdrasil/yggdrasil.conf", {
 		encoding: "utf-8",
 	})
 );
@@ -146,20 +148,6 @@ await promisify(exec)(
 							>
 								<Code
 									content={self.key}
-								/>
-							</dd>
-						</div>
-						<div
-							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
-						>
-							<dt class="text-sm font-medium text-gray-500">
-								Yggdrasil Coords
-							</dt>
-							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
-							>
-								<Code
-									content={`[${self.coords.join(", ")}]`}
 								/>
 							</dd>
 						</div>
