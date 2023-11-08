@@ -70,41 +70,36 @@ await promisify(exec)(
 <Layout title="201:ca29:d4c5:50c8:b6f3:aa9a:e5d7:616c | Peers">
 	<main>
 		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-			<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+			<div class="overflow-hidden shadow sm:rounded-lg bg-white dark:bg-gray-800 dark:text-white">
 				<div class="px-4 py-5 sm:px-6">
-					<h3 class="text-lg font-medium leading-6 text-gray-900">
+					<h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">
 						Public Peer Details
 					</h3>
 				</div>
-				<div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-					<dl class="sm:divide-y sm:divide-gray-200">
+				<div class="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:p-0">
+					<dl class="sm:divide-y sm:divide-gray-200 dark:sm:divide-gray-700">
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Public IP
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
-								<Code content="tcp://158.101.229.219:17002" />
-								<Code
-									content="tcp://[2603:c023:8001:1600:35e0:acde:2c6e:b27f]:17002"
-								/>
-								<Code content="tls://158.101.229.219:17001" />
-								<Code
-									content="tls://[2603:c023:8001:1600:35e0:acde:2c6e:b27f]:17001"
-								/>
+								<Code content="tcp://pp1.ygg.sy.sa:8441" />
+								<Code content="tls://pp1.ygg.sy.sa:8442" />
+								<Code content="quic://pp1.ygg.sy.sa:8443" />
 							</dd>
 						</div>
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Yggdrasil IPv6 Address
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								<Code content={self.address} />
 							</dd>
@@ -112,11 +107,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Yggdrasil IPv6 Subnet
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								<Code
 									content={self.subnet}
@@ -126,11 +121,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Yggdrasil Version
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								<Code
 									content={self.build_version}
@@ -140,11 +135,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Yggdrasil Public Key
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								<Code
 									content={self.key}
@@ -154,11 +149,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Location
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								Saudi Arabia, Jeddah
 							</dd>
@@ -166,11 +161,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Traffic
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								10TB/month
 							</dd>
@@ -178,11 +173,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Bandwidth
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								0.5Gbps (500Mbps)
 							</dd>
@@ -190,11 +185,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Downstreams Peers
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								{downStreamsPeers.length}
 							</dd>
@@ -202,11 +197,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Upstreams Peers
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								{upStreamsPeers.length}
 							</dd>
@@ -215,19 +210,19 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Current Used Traffic
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								<div class="-mt-px flex" title="downloads">
 									<div class="flex w-0 flex-1">
 										<a
-											class="relative inline-flex w-0 flex-1 rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700"
+											class="relative inline-flex w-0 flex-1 rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 dark:text-gray-100"
 										>
 											<svg
-												class="h-5 w-5 text-gray-400"
+												class="h-5 w-5 text-gray-400 dark:text-gray-100"
 												xmlns="http://www.w3.org/2000/svg"
 												class="ionicon"
 												viewBox="0 0 512 512"
@@ -252,10 +247,10 @@ await promisify(exec)(
 										title="uploads"
 									>
 										<a
-											class="relative -mr-px inline-flex w-0 flex-1 rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700"
+											class="relative -mr-px inline-flex w-0 flex-1 rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 dark:text-gray-100"
 										>
 											<svg
-												class="h-5 w-5 text-gray-400"
+												class="h-5 w-5 text-gray-400 dark:text-gray-100"
 												xmlns="http://www.w3.org/2000/svg"
 												class="ionicon"
 												viewBox="0 0 512 512"
@@ -281,11 +276,11 @@ await promisify(exec)(
 						<div
 							class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6"
 						>
-							<dt class="text-sm font-medium text-gray-500">
+							<dt class="text-sm font-medium text-gray-500 dark:text-gray-100">
 								Load
 							</dt>
 							<dd
-								class="text-sm text-gray-900 sm:col-span-2 sm:mt-0"
+								class="text-sm text-gray-900 dark:text-gray-100 sm:col-span-2 sm:mt-0"
 							>
 								<img src="/output.png" alt="Traffic Uses" />
 							</dd>

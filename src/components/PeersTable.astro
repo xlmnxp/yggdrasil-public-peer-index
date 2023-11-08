@@ -11,69 +11,69 @@ export function getSize(size: number) {
     var i: number = Math.floor(Math.log(size) / Math.log(1024));
     return (
         // @ts-ignore
-        ((size / Math.pow(1024, i)).toFixed(2) * 1) +
+        (size / Math.pow(1024, i)).toFixed(2) * 1 +
         " " +
         ["B", "kB", "MB", "GB", "TB"][i]
     );
-};
+}
 ---
 
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 mb-2">
     <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
-            <h1 class="text-xl font-semibold text-gray-900">
+            <h1 class="text-xl font-semibold text-gray-900 dark:text-white">
                 {title}
             </h1>
-            <p class="mt-2 text-sm text-gray-700">
+            <p class="mt-2 text-sm text-gray-700 dark:text-gray-200">
                 {description}
             </p>
         </div>
     </div>
 
-    <div class="mt-8 flex flex-col">
-        <div class="-my-2 -mx-4 sm:-mx-6 lg:-mx-8">
+    <div class="mt-8">
+        <div class="-my-2 -mx-4 sm:-mx-6 lg:-mx-8 overflow-x-auto">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="shadow-sm ring-1 ring-black ring-opacity-5">
                     <table
-                        class="min-w-full max-w-7xl border-separate"
+                        class="min-w-full border-separate"
                         style="border-spacing: 0"
                     >
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-50 dark:bg-gray-800">
                             <tr>
                                 <th
                                     scope="col"
-                                    class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
+                                    class="sticky top-0 z-10 border-b border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
                                     >Address</th
                                 >
                                 <th
                                     scope="col"
-                                    class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                                    class="sticky top-0 z-10 border-b border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 backdrop-blur backdrop-filter"
                                     >Traffic</th
                                 >
                                 <th
                                     scope="col"
-                                    class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
+                                    class="sticky top-0 z-10 border-b border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 backdrop-blur backdrop-filter"
                                     >Tags</th
                                 >
                             </tr>
                         </thead>
-                        <tbody class="bg-white">
+                        <tbody class="bg-white dark:bg-gray-700">
                             {
                                 peers.map((peer) => {
                                     return (
-                                        <tr class="hover:bg-gray-50">
-                                            <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                                        <tr class="hover:bg-gray-50 hover:dark:bg-gray-500">
+                                            <td class="whitespace-nowrap border-b border-gray-200 dark:border-gray-800 py-4 pl-4 pr-3 font-medium text-gray-900 dark:text-gray-100 sm:pl-6 lg:pl-8">
                                                 {peer.address}
                                             </td>
-                                            <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 min-w-[270px] w-[270px]">
+                                            <td class="whitespace-nowrap border-b border-gray-200 dark:border-gray-800 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-100 sm:pl-6 lg:pl-8 min-w-[270px] w-[270px]">
                                                 <div
                                                     class="-mt-px flex"
                                                     title="downloads"
                                                 >
                                                     <div class="flex w-0 flex-1">
-                                                        <a class="relative inline-flex w-0 flex-1 rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700">
+                                                        <a class="relative inline-flex w-0 flex-1 rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 dark:text-gray-100">
                                                             <svg
-                                                                class="h-5 w-5 text-gray-400"
+                                                                class="h-5 w-5 text-gray-400 dark:text-gray-100"
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 class="ionicon"
                                                                 viewBox="0 0 512 512"
@@ -101,9 +101,9 @@ export function getSize(size: number) {
                                                         class="-ml-px flex w-0 flex-1"
                                                         title="uploads"
                                                     >
-                                                        <a class="relative -mr-px inline-flex w-0 flex-1 rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700">
+                                                        <a class="relative -mr-px inline-flex w-0 flex-1 rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 dark:text-gray-100">
                                                             <svg
-                                                                class="h-5 w-5 text-gray-400"
+                                                                class="h-5 w-5 text-gray-400 dark:text-gray-100"
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 class="ionicon"
                                                                 viewBox="0 0 512 512"
@@ -129,9 +129,9 @@ export function getSize(size: number) {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                                            <td class="whitespace-nowrap border-b border-gray-200 dark:border-gray-800 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-100 sm:pl-6 lg:pl-8">
                                                 <span
-                                                    class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800"
+                                                    class="inline-block flex-shrink-0 rounded-full bg-green-200 dark:bg-green-300 px-2 py-0.5 text-xs font-medium text-green-800 dark:text-green-900"
                                                     title="uptime"
                                                 >
                                                     {Math.floor(
@@ -144,8 +144,12 @@ export function getSize(size: number) {
                                                         peer.remote.indexOf(
                                                             "tls"
                                                         ) === 0
-                                                            ? "bg-orange-100 text-orange-800"
-                                                            : "bg-yellow-100 text-yellow-800"
+                                                            ? "bg-orange-100 text-orange-800 dark:bg-orange-200 dark:text-orange-900"
+                                                            : peer.remote.indexOf(
+                                                                  "tcp"
+                                                              ) === 0
+                                                            ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900"
+                                                            : "bg-green-100 text-green-800 dark:bg-green-200 dark:text-green-900"
                                                     }`}
                                                     title="connection protocol"
                                                 >
