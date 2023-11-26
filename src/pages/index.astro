@@ -31,9 +31,9 @@ const { Peers: _upStreamsPeers } = HJSON.parse(
 	})
 );
 
-let upStreamsPeers: any[] = peers.filter((peer: any) => peer.inbound);
+let upStreamsPeers: any[] = peers.filter((peer: any) => !peer.inbound);
 
-let downStreamsPeers: any[] = peers.filter((peer: any) => !peer.inbound);
+let downStreamsPeers: any[] = peers.filter((peer: any) => peer.inbound);
 
 const Traffic = {
 	download: peers.reduce(
